@@ -5,11 +5,11 @@ require "sophia-transcoder/version"
 Gem::Specification.new do |s|
   s.name        = "sophia-transcoder"
   s.version     = Sophia::Transcoder::VERSION
-  s.authors     = ["TODO: Write your name"]
-  s.email       = ["git-email-address"]
+  s.authors     = ["Vitaly Tsevan"]
+  s.email       = ["vitaly.tsevan@warecorp.com"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = "Sophia Transcoder"
+  s.description = "Sophia Transcoder"
 
   s.rubyforge_project = "sophia-transcoder"
 
@@ -21,4 +21,9 @@ Gem::Specification.new do |s|
   # specify any dependencies here; for example:
   # s.add_development_dependency "rspec"
   # s.add_runtime_dependency "rest-client"
+  s.add_runtime_dependency 'aws-sdk'
+  s.add_runtime_dependency 'streamio-ffmpeg', '0.8.3'
+  s.add_runtime_dependency 'active_support'
+  s.add_runtime_dependency 'i18n'
+
 end

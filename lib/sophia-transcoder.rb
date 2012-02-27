@@ -1,7 +1,4 @@
-require "sophia-transcoder/version"
+$:.unshift(File.expand_path('sophia-transcoder', File.dirname(__FILE__)))
 
-module Sophia
-  module Transcoder
-    # Your code goes here...
-  end
-end
+require "version"
+require "transcoder"
