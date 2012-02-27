@@ -93,6 +93,11 @@ module Transcoder
       bitrates  = [ [200, 35], [900, 24] ]
       keys = bitrates.map { |b,k| to_key[b, 'mp4'] }
 
+      # upload original file
+      @last_original = to_key['original', 'mp4']
+      upload_s3(bucket, @last_original, input_path) if guaranteach?
+
+      # transcode and upload to s3
       bitrates.each do |bitrate, quality|
         output = to_path["#{bitrate}.mp4"]
         transcode_video(movie, output, bitrate, quality)
@@ -207,6 +212,11 @@ module Transcoder
 
   def sophia_config=(value)
     @config = value
+  end
+
+  # ugly backdoor to get last original file from s3
+  def last_original
+    @last_original
   end
 
   extend self
