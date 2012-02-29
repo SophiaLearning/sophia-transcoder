@@ -18,7 +18,7 @@ module Transcoder
 
   def transcode_with_zencoder(id, input_url, label, callback_url=nil)
     base_url = proc { |quality| "s3://#{sophia_config.s3_bucket}/zencoder_asset/#{sophia_config.appid}/#{id}/#{quality}"}
-    label = proc {|quality| "Sophia-#{quality}" }
+    label = proc {|quality| "sophia-#{quality}" }
 
     recipe = {
       :api_key  => sophia_config.zencoder_api_key,
