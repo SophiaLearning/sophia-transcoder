@@ -134,7 +134,7 @@ module Transcoder
     input_movie.transcode(
       output_video,
       " -vcodec libx264 -b #{bitrate}k -bufsize 2000k #{resolution} #{compression} " +
-      " -vpre libx264-medium -threads 0 " +
+      " -vpre libx264-ultrafast -threads 0 " +
       " -acodec libfaac -ab #{audio_bitrate}k -ar 44100")
   end
 
