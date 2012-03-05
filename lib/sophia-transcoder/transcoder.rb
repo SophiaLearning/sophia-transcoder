@@ -136,7 +136,7 @@ module Transcoder
       output_video,
       " -vcodec libx264 -b:v #{bitrate}k #{resolution} #{compression} " +
       " -vpre libx264-medium -threads 0 " +
-      " -acodec libmp3lame -b:a #{audio_bitrate}k -ar 44100")
+      " -acodec aac -b:a #{audio_bitrate}k -ar 44100 -strict -2")
   end
 
   def new_size(input_movie, expected_width)
