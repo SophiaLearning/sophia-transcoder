@@ -109,7 +109,7 @@ module Transcoder
       thumb_key  = to_key['thumbnail', 'png']
 
       transcode_thumbnail(movie, thumb_path)
-      upload_s3(bucket, thumb_key, thumb_path)
+      upload_s3(bucket, thumb_key, thumb_path, 'image/png')
 
       return [keys, thumb_key]
     end
@@ -176,13 +176,13 @@ module Transcoder
     logger.info "...downloaded!"
   end
 
-  def upload_s3(bucket, key, file_name)
+  def upload_s3(bucket, key, file_name, content='video/mp4')
     bucket = AWS::S3.new.buckets[bucket]
     object = bucket.objects[key[1..-1]]
 
     logger.info "...uploading file to #{object.url_for(:get)}"
 
-    object.write(File.read(file_name))
+    object.write(File.read(file_name), :content_type => content)
 
     logger.info "...uploaded!"
   end
