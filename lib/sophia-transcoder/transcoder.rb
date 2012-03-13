@@ -137,6 +137,8 @@ module Transcoder
       " -vcodec libx264 -vb #{bitrate}k #{resolution} #{compression} " +
       " -vpre libx264-medium -threads 0 " +
       " -acodec libfaac -ab #{audio_bitrate}k -ar 44100")
+
+    `qt-faststart #{output_video} #{output_video}.tmp && mv #{output_video}.tmp #{output_video}`
   end
 
   def new_size(input_movie, expected_width)
