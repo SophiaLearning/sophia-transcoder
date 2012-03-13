@@ -111,7 +111,13 @@ module Transcoder
       transcode_thumbnail(movie, thumb_path)
       upload_s3(bucket, thumb_key, thumb_path, 'image/png')
 
-      return [keys, thumb_key]
+      pthumb_path = to_path['pthumb.png']
+      pthumb_key  = to_key['pthumbnail', 'png']
+
+      transcode_thumbnail(movie, pthumb_path)
+      upload_s3(bucket, pthumb_key, pthumb_path, 'image/png', '700x400', 0.33)
+
+      return [keys, [thumb_key, pthumb_key]]
     end
 
 #  rescue => e
