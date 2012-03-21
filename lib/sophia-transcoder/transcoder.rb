@@ -79,7 +79,7 @@ module Transcoder
     movie = nil
     Dir.mktmpdir("sophia-transcode-#{id}") do |dir|
       bucket = sophia_config.s3_bucket
-      key    = "/ffmpeg_asset/#{sophia_config.appid}/#{id}"
+      key    = "/ffmpeg_asset2/#{sophia_config.appid}/#{id}"
       to_key = proc { |k, ext| "#{key}/#{k}.#{ext}" }
       to_path= proc { |fn| File.join(dir, fn) }
 
@@ -141,7 +141,7 @@ module Transcoder
     input_movie.transcode(
       output_video,
       " -vcodec libx264 -maxrate #{bitrate}k #{resolution} #{compression} " +
-      " -vpre libx264-medium -threads 6 " +
+      " -vpre libx264-default -threads 6 " +
       " -acodec libfaac -ab #{audio_bitrate}k -ar 44100")
 
     `qt-faststart #{output_video} #{output_video}.tmp && mv #{output_video}.tmp #{output_video}`
