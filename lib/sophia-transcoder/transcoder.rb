@@ -135,14 +135,14 @@ module Transcoder
   def transcode_video(input_movie, output_video, bitrate, quality, expected_width = 700)
     resolution  = new_size(input_movie, expected_width).try { |r| "-s %dx%d" % r }
     compression = " -qmin #{quality}" if input_movie.video_bitrate.try :>, bitrate
-    input_bt = input_movie.audio_bitrate.to_i
-    audio_bitrate =  input_bt >= 96 ? input_bt : 96
+    #input_bt = input_movie.audio_bitrate.to_i
+    #audio_bitrate =  input_bt >= 96 ? input_bt : 96
 
     input_movie.transcode(
       output_video,
       " -vcodec libx264 -maxrate #{bitrate}k #{resolution} #{compression} " +
       " -vpre libx264-default -threads 6 " +
-      " -acodec libfaac -ab #{audio_bitrate}k -ar 44100")
+      " -acodec libfaac -ab 96k -ar 44100")
 
     `qt-faststart #{output_video} #{output_video}.tmp && mv #{output_video}.tmp #{output_video}`
   end
