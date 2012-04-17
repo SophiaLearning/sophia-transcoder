@@ -20,39 +20,32 @@ module Transcoder
     base_url = proc { |quality| "s3://#{sophia_config.s3_bucket}/zencoder_asset/#{sophia_config.appid}/#{id}/#{quality}"}
     label = proc {|quality| "sophia-#{quality}" }
 
-    recipe = {
-      :api_key  => sophia_config.zencoder_api_key,
-      :input    => input_url,
-      :output   => [{
-        "base_url"         => base_url['900'],
+    recipe_mock = proc{|quality|
+      {
+        "base_url"         => base_url[quality],
         :notifications     => callback_url,
-        :label             => label['900'],
+        :label             => label[quality],
         :width             => 700,
         :video_codec       => "h264",
         :quality           => 5,
-        :video_bitrate     => 900,
+        :max_video_bitrate => quality,
         :thumbnails        => {
-          :base_url => base_url['900'],
-          :number   => 1,
-          :size     => "700x400"
-        }
-      },
-      {"base_url"          => base_url['200'],
-        :notifications     => callback_url,
-        :label             => label['200'],
-        :width             => 700,
-        :video_codec       => "h264",
-        :quality           => 5,
-        :video_bitrate     => 200,
-        :thumbnails        => {
-          :base_url => base_url['200'],
+          :base_url => base_url[quality],
           :number   => 1,
           :size     => "700x400"
         }
       }
-
-     ]
     }
+
+    recipe = {
+      :api_key  => sophia_config.zencoder_api_key,
+      :input    => input_url,
+      :output   => [
+                    recipe_mock['200'],
+                    recipe_mock['900']
+                   ]
+    }
+
     # Explicitly set the test parameter. ZenCoder failed by changing treatment of the param where the existence of the param made test true.
     recipe.merge!(:test => 1) if sophia_config.zencoder_testing == true
     logger.info "ZENCODER RECIPE:\n#{recipe.inspect}\n"
