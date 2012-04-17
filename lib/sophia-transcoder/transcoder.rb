@@ -37,19 +37,6 @@ module Transcoder
           :size     => "700x400"
         }
       },
-      {"base_url"          => base_url['700'],
-        :notifications     => callback_url,
-        :label             => label['700'],
-        :width             => 700,
-        :video_codec       => "h264",
-        :quality           => 5,
-        :video_bitrate     => 700,
-        :thumbnails        => {
-          :base_url => base_url['700'],
-          :number   => 1,
-          :size     => "700x400"
-        }
-      },
       {"base_url"          => base_url['200'],
         :notifications     => callback_url,
         :label             => label['200'],
