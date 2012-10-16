@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   # s.add_development_dependency "rspec"
   # s.add_runtime_dependency "rest-client"
   s.add_runtime_dependency 'aws-sdk'
-  s.add_runtime_dependency 'streamio-ffmpeg', '0.8.3'
+  s.add_runtime_dependency 'streamio-ffmpeg'
   s.add_runtime_dependency(%q<activesupport>, [">= 3.1.0"])
   s.add_runtime_dependency 'i18n'
 
